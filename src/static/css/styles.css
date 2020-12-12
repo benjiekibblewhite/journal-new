@@ -6,3 +6,10 @@ html {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: lightcyan;
 }
+
+.card {
+  background: #fff;
+  box-shadow: 0px 4px 10px #e9ecf7;
+  border-radius: 6px;
+  padding: 15px;
+}

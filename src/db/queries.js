@@ -17,7 +17,7 @@ function getPost(req, res) {
 
   pool.query("SELECT * from posts WHERE id = $1", [id], (error, result) => {
     if (error) throw error;
-    res.status(22).json(result.rows);
+    res.status(200).json(result.rows);
   });
 }
 
