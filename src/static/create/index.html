@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Journal - New Post</title>
+    <link rel="stylesheet" href="/css/styles.css?v=1.0" />
+    <link rel="stylesheet" href="/css/form.css?v=1.0" />
+  </head>
+  <body>
+    <h1>New Post</h1>
+    <div class="card">
+      <form class="post-form" onsubmit="handleSubmit(event)">
+        <div id="errors"></div>
+        <label for="post-title" class="post-form__input post-form__title">
+          Title
+          <input placeholder="Title" name="title" id="post-title" required />
+        </label>
+        <label
+          for="post-body"
+          class="post-form__input post-form__body"
+          required
+        >
+          Body
+          <textarea name="body" id="post-body"></textarea>
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script src="/js/create.js"></script>
+  </body>
+</html>

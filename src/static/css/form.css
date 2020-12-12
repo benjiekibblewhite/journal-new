@@ -1,0 +1,17 @@
+.post-form {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.post-form__input {
+  display: block;
+}
+
+.post-form__input > * {
+  display: block;
+  width: 100%;
+}
+
+.post-form__body > textarea {
+  min-height: 500px;
+}

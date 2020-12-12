@@ -3,7 +3,10 @@ const postTarget = document.getElementById("post-body");
 
 const updateTitle = (title) => (titleTarget.innerText = title);
 
-const Post = ({ created_at, updated_at, title, body }) => `
+const DeleteButton = (id) =>
+  `<button data-id='${id}' class='post__delete-button'>Delete Post</button>`;
+
+const Post = ({ created_at, updated_at, body, id }) => `
 <article class='post'>
   <header>
     <p class='post__time'>Posted <time datetime='${created_at}'>${created_at}</time></p>
@@ -13,6 +16,7 @@ const Post = ({ created_at, updated_at, title, body }) => `
         : ""
     }
     <section class='post__body'>${body}</section>
+    ${DeleteButton(id)}
   </header>
 </article>`;
 
@@ -29,10 +33,32 @@ function showPost(post) {
   updateTitle(post.title);
 }
 
+function deletePost(id) {
+  console.log({ id });
+  fetch(`/api/posts/${id}`, {
+    method: "DELETE",
+  })
+    .then((res) => {
+      console.log(res);
+      window.location.replace("/posts");
+    })
+    .catch(console.error);
+}
+
+function attachDeleteListeners() {
+  const deleteButtons = document.querySelectorAll(".post__delete-button");
+  deleteButtons.forEach((target) => {
+    target.addEventListener("click", () => deletePost(target.dataset.id));
+  });
+}
+
 async function init() {
   updateTitle("Loading...");
   const id = new URLSearchParams(window.location.search).get("id");
-  getPost(id).then((res) => showPost(res[0]));
+  getPost(id).then((res) => {
+    showPost(res[0]);
+    attachDeleteListeners();
+  });
 }
 
 init();

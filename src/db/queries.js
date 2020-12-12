@@ -23,13 +23,14 @@ function getPost(req, res) {
 
 function createPost(req, res) {
   const { title, body } = req.body;
-
   pool.query(
-    "INSERT INTO posts (title, body, created_at) VALUES ( $1, $2, NOW() )",
+    "INSERT INTO posts (title, body, created_at) VALUES ( $1, $2, NOW() )  RETURNING *",
     [title, body],
     (error, result) => {
       if (error) throw error;
-      res.status(200).json(`Post added with ID ${result.insertId}`);
+      console.log(result);
+      const id = result.rows[0].id;
+      res.status(200).json({ id });
     }
   );
 }
