@@ -28,7 +28,6 @@ function createPost(req, res) {
     [title, body],
     (error, result) => {
       if (error) throw error;
-      console.log(result);
       const id = result.rows[0].id;
       res.status(200).json({ id });
     }
@@ -36,15 +35,16 @@ function createPost(req, res) {
 }
 
 function updatePost(req, res) {
-  const id = parseInt(request.params.id);
+  const id = parseInt(req.params.id);
   const { title, body } = req.body;
 
   pool.query(
-    "UPDATE posts SET title = $1, body = $2, updated_at = NOW()",
+    "UPDATE posts SET title = $1, body = $2, updated_at = NOW() WHERE id = $3   RETURNING *",
     [title, body, id],
     (error, result) => {
       if (error) throw error;
-      res.status(200).json(`Post updated with ID ${result.innerId}`);
+      const id = result.rows[0].id;
+      res.status(200).json({ id });
     }
   );
 }

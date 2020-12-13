@@ -3,6 +3,9 @@ const postTarget = document.getElementById("post-body");
 
 const updateTitle = (title) => (titleTarget.innerText = title);
 
+const EditLink = (id) =>
+  `<a href='/edit?id=${id}' class='post__edit-link'>Edit Post</a>`;
+
 const DeleteButton = (id) =>
   `<button data-id='${id}' class='post__delete-button'>Delete Post</button>`;
 
@@ -16,7 +19,7 @@ const Post = ({ created_at, updated_at, body, id }) => `
         : ""
     }
     <section class='post__body'>${body}</section>
-    ${DeleteButton(id)}
+    ${DeleteButton(id)} ${EditLink(id)}
   </header>
 </article>`;
 
@@ -28,18 +31,15 @@ function getPost(id) {
 }
 
 function showPost(post) {
-  console.log(post);
   postTarget.innerHTML = Post(post);
   updateTitle(post.title);
 }
 
 function deletePost(id) {
-  console.log({ id });
   fetch(`/api/posts/${id}`, {
     method: "DELETE",
   })
     .then((res) => {
-      console.log(res);
       window.location.replace("/posts");
     })
     .catch(console.error);

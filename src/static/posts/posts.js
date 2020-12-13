@@ -20,7 +20,6 @@ function getPosts() {
 }
 
 function showPosts(posts) {
-  console.log(posts);
   postsTarget.innerHTML = PostList(posts);
 }
 
