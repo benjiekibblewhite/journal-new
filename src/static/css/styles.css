@@ -197,6 +197,7 @@ button.with-icon {
 .post__body {
   margin: 30px 0;
   line-height: 1.5em;
+  white-space: pre-line;
 }
 
 .post__buttons {
