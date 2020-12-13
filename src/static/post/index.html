@@ -12,10 +12,34 @@
   </head>
 
   <body>
-    <h1 id="post-title"></h1>
-    <div class="card">
+    <div>
+      <button class="menu__open-button">Menu</button>
+      <div class="menu__overlay">
+        <div class="menu__sidebar card" onclick="event.stopPropagation()">
+          <div class="menu__header">
+            <p>Benjie</p>
+            <button class="menu__close-button with-icon">
+              <img src="/img/cancel.svg" class="menu__close-button--icon" />
+            </button>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="/">Journal</a></li>
+              <li><a href="/edit">New Post</a></li>
+            </ul>
+          </nav>
+          <button class="secondary menu__logout-button">Log Out</button>
+        </div>
+      </div>
+    </div>
+    <div class="card content">
+      <a class="link-as-button post__back-button with-icon" href="/">
+        <img class="post__back-button--icon" src="/img/right-arrow.svg" />
+      </a>
+      <h1 id="post-title"></h1>
       <div id="post-body"></div>
     </div>
     <script src="./post.js"></script>
+    <script src="/js/navigation.js"></script>
   </body>
 </html>

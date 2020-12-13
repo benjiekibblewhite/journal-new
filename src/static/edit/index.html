@@ -8,25 +8,41 @@
     <link rel="stylesheet" href="/css/form.css?v=1.0" />
   </head>
   <body>
-    <h1 id="post-form__header">New Post</h1>
-    <div class="card">
+    <div>
+      <button class="menu__open-button">Menu</button>
+      <div class="menu__overlay">
+        <div class="menu__sidebar card" onclick="event.stopPropagation()">
+          <div class="menu__header">
+            <p>Benjie</p>
+            <button class="menu__close-button with-icon">
+              <img src="/img/cancel.svg" class="menu__close-button--icon" />
+            </button>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="/">Journal</a></li>
+              <li><a href="/edit">New Post</a></li>
+            </ul>
+          </nav>
+          <button class="secondary menu__logout-button">Log Out</button>
+        </div>
+      </div>
+    </div>
+    <div class="card content">
+      <a class="link-as-button post__back-button with-icon" href="/">
+        <img class="post__back-button--icon" src="/img/right-arrow.svg" />
+      </a>
       <form class="post-form" onsubmit="handleSubmit(event)">
         <div id="errors"></div>
-        <label for="post-title" class="post-form__input post-form__title">
-          Title
-          <input placeholder="Title" name="title" id="post-title" required />
-        </label>
-        <label
-          for="post-body"
-          class="post-form__input post-form__body"
-          required
-        >
-          Body
-          <textarea name="body" id="post-body"></textarea>
+       
+          <input placeholder="Title" name="title" id="post-title"  class='post-form__input' required />
+    
+          <textarea name="body" id="post-body" class="post-form__input" required></textarea>
         </label>
         <button type="submit">Submit</button>
       </form>
     </div>
     <script src="./edit.js"></script>
+    <script src="/js/navigation.js"></script>
   </body>
 </html>

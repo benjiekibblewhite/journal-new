@@ -9,7 +9,9 @@ const PostList = (posts) => {
 };
 
 const Post = ({ id, created_at, title }) => `<li class='post-list__item'>
-  <a href='/post?id=${id}'>${title} - <span class='post-list__item--date'>${created_at}</span></a>
+  <a href='/post?id=${id}'>${title} - <span class='post-list__item--date'>${new Date(
+  created_at
+).toDateString()}</span></a>
 </li>`;
 
 function getPosts() {

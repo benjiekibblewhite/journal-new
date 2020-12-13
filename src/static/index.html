@@ -4,27 +4,40 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>My Journal</title>
+    <title>My Journal - Posts</title>
     <meta name="description" content="The HTML5 Herald" />
     <meta name="author" content="SitePoint" />
 
-    <link rel="stylesheet" href="css/styles.css?v=1.0" />
+    <link rel="stylesheet" href="/css/styles.css?v=1.0" />
   </head>
 
   <body>
-    <h1>Journal!</h1>
-    <div class="card">
-      <p>
-        Welcome to my journal. Here, I will be slowly building a vanilla
-        js/css/html journal site, served by a framework-free express backend,
-        with a postgres db.
-      </p>
-      <nav>
-        <ul>
-          <li><a href="/edit">New Post</a></li>
-          <li><a href="/posts">See All Posts</a></li>
-        </ul>
-      </nav>
+    <div>
+      <button class="menu__open-button">Menu</button>
+      <div class="menu__overlay">
+        <div class="menu__sidebar card" onclick="event.stopPropagation()">
+          <div class="menu__header">
+            <p>Benjie</p>
+            <button class="menu__close-button with-icon">
+              <img src="/img/cancel.svg" class="menu__close-button--icon" />
+            </button>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="/">Journal</a></li>
+              <li><a href="/edit">New Post</a></li>
+            </ul>
+          </nav>
+          <button class="secondary menu__logout-button">Log Out</button>
+        </div>
+      </div>
     </div>
+    <div class="card content">
+      <h1>Journal</h1>
+      <a href="/edit" class="link-as-button secondary">New Post</a>
+      <div id="posts"></div>
+    </div>
+    <script src="/js/posts.js"></script>
+    <script src="/js/navigation.js"></script>
   </body>
 </html>

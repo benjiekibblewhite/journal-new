@@ -4,7 +4,7 @@ const postTarget = document.getElementById("post-body");
 const updateTitle = (title) => (titleTarget.innerText = title);
 
 const EditLink = (id) =>
-  `<a href='/edit?id=${id}' class='post__edit-link'>Edit Post</a>`;
+  `<a href='/edit?id=${id}' class='post__edit-link link-as-button secondary'>Edit Post</a>`;
 
 const DeleteButton = (id) =>
   `<button data-id='${id}' class='post__delete-button'>Delete Post</button>`;
@@ -12,14 +12,13 @@ const DeleteButton = (id) =>
 const Post = ({ created_at, updated_at, body, id }) => `
 <article class='post'>
   <header>
-    <p class='post__time'>Posted <time datetime='${created_at}'>${created_at}</time></p>
-    ${
-      updated_at
-        ? `<p class='post__time'>Posted <time datetime='${created_at}>${created_at}</time>'</p>`
-        : ""
-    }
+    <p class='post__time'><time datetime='${created_at}'>${new Date(
+  created_at
+).toDateString()}</time></p>
     <section class='post__body'>${body}</section>
-    ${DeleteButton(id)} ${EditLink(id)}
+    <div class='post__buttons'>
+      ${EditLink(id)} ${DeleteButton(id)} 
+    </div>
   </header>
 </article>`;
 
@@ -36,13 +35,15 @@ function showPost(post) {
 }
 
 function deletePost(id) {
-  fetch(`/api/posts/${id}`, {
-    method: "DELETE",
-  })
-    .then((res) => {
-      window.location.replace("/posts");
+  if (confirm("Are you sure? This cannot be undone")) {
+    fetch(`/api/posts/${id}`, {
+      method: "DELETE",
     })
-    .catch(console.error);
+      .then((res) => {
+        window.location.replace("/");
+      })
+      .catch(console.error);
+  }
 }
 
 function attachDeleteListeners() {
@@ -56,6 +57,7 @@ async function init() {
   updateTitle("Loading...");
   const id = new URLSearchParams(window.location.search).get("id");
   getPost(id).then((res) => {
+    console.log(res);
     showPost(res[0]);
     attachDeleteListeners();
   });
