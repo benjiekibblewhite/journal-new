@@ -169,8 +169,8 @@ button.with-icon {
   margin: 0;
   list-style: none;
   padding: 0;
-  width: 400px;
-  max-width: 100%;
+  max-width: 400px;
+  width: 100%;
 }
 
 .menu__sidebar li {
@@ -215,9 +215,6 @@ button.with-icon {
 
 .post-list {
   list-style: none;
-}
-
-.post-list a {
 }
 
 .post__back-button--icon {
