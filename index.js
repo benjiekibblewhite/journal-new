@@ -26,11 +26,11 @@ app.post("/api/user", users.createUser);
 app.post("/api/user/login", users.loginUser);
 
 // posts
-app.get("/api/posts", db.getPosts);
-app.get("/api/posts/:id", db.getPost);
-app.post("/api/posts", db.createPost);
-app.put("/api/posts/:id", db.updatePost);
-app.delete("/api/posts/:id", db.deletePost);
+app.get("/api/posts", verifyToken, db.getPosts);
+app.get("/api/posts/:id", verifyToken, db.getPost);
+app.post("/api/posts", verifyToken, db.createPost);
+app.put("/api/posts/:id", verifyToken, db.updatePost);
+app.delete("/api/posts/:id", verifyToken, db.deletePost);
 
 // Serve static directory
 var distDir = __dirname + "/src/static/";

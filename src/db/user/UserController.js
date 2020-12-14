@@ -52,7 +52,6 @@ function loginUser(req, res) {
 
 function getUser(req, res) {
   const { userid } = req;
-  console.log(userid);
   pool.query(
     "SELECT * from users WHERE userid = $1",
     [userid],
