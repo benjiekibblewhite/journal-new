@@ -28,8 +28,10 @@ function createUser(req, res) {
 
 function loginUser(req, res) {
   const { email, password } = req.body;
-  if (!email) throw new Error("Email is required");
-  if (!password) throw new Error("Password is required");
+  if (!email)
+    res.status(400).json({ auth: false, message: "Email is required" });
+  if (!password)
+    res.status(400).json({ auth: false, message: "Password is required" });
   console.log({ email, password });
   pool.query(
     "SELECT * from users WHERE email = $1",
@@ -37,9 +39,14 @@ function loginUser(req, res) {
     (error, result) => {
       if (error) throw error;
       const user = result.rows[0];
-      if (!user) throw new Error("Unable to auth");
+      if (!user) {
+        return res.status(404).json({ auth: false, message: "Unable to auth" });
+      }
+
       const passwordIsValid = bcrypt.compareSync(password, user.password);
-      if (!passwordIsValid) throw new Error("Unable to auth");
+      if (!passwordIsValid) {
+        return res.status(404).json({ auth: false, message: "Unable to auth" });
+      }
 
       const token = jwt.sign({ id: user.userid }, process.env.SECRET, {
         expiresIn: 60 * 60 * 24 * 7, // expires in 7 days

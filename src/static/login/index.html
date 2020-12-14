@@ -9,6 +9,7 @@
     <meta name="author" content="SitePoint" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/styles.css?v=1.0" />
+    <link rel="stylesheet" href="/css/form.css?v=1.0" />
   </head>
 
   <body>
@@ -33,14 +34,37 @@
       </div>
     </div>
     <div class="card content">
-      <h1>Journal</h1>
+      <h1>Login</h1>
       <div id="login-or-post-list">
-        <a href="/edit" class="link-as-button secondary">New Post</a>
-        <div id="posts"></div>
+        <form class="login-form" onsubmit="submitLogin(event)">
+          <label for="login-email">
+            Email
+            <input
+              type="email"
+              name="email"
+              id="login-email"
+              required
+              class="post-form__input"
+              placeholder="Email"
+            />
+          </label>
+          <label for="login-password">
+            Password
+            <input
+              type="password"
+              name="password"
+              id="login-password"
+              required
+              class="post-form__input"
+              placeholder="Password"
+            />
+          </label>
+          <p id="login-form-error" class="form-error"></p>
+          <button>Login</button>
+        </form>
       </div>
     </div>
-    <script src="/js/auth.js"></script>
-    <script src="/js/posts.js"></script>
+    <script src="./login.js"></script>
     <script src="/js/navigation.js"></script>
   </body>
 </html>
