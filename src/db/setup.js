@@ -32,12 +32,13 @@ function addUsers() {
   );
 
   pool.query(
-    "CREATE TABLE users (userID SERIAL PRIMARY KEY, registered_At TIMESTAMP, name TEXT, email TEXT, password TEXT)",
+    "CREATE TABLE users (userID SERIAL PRIMARY KEY, registered_At TIMESTAMP, name TEXT, email TEXT UNIQUE, password TEXT)",
     (error, result) => {
       if (error) console.error(error);
       console.log("Table users Created");
     }
   );
 }
+// addUsers();
+initDatabse();
 addUsers();
-// initDatabse();
