@@ -57,7 +57,6 @@ async function init() {
   updateTitle("Loading...");
   const id = new URLSearchParams(window.location.search).get("id");
   getPost(id).then((res) => {
-    console.log(res);
     showPost(res[0]);
     attachDeleteListeners();
   });

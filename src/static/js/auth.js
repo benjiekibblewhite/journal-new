@@ -1,10 +1,9 @@
-// check for tokens in local storage
+// check for login in local storage
 
-const token = window.localStorage.getItem("token");
-const name = window.localStorage.getItem("name");
+const userName = window.localStorage.getItem("name");
 
 function init() {
-  if (!token) {
+  if (!userName) {
     window.location.replace("/login");
   }
 }

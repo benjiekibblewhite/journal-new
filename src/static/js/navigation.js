@@ -8,6 +8,11 @@ function closeNavigation() {
   sidebar[0].classList.remove("open");
 }
 
+function logout() {
+  localStorage.removeItem("name");
+  window.location.replace("/login");
+}
+
 document
   .querySelectorAll(".menu__open-button")[0]
   .addEventListener("click", openNavigation);

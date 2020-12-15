@@ -21,7 +21,13 @@ function createUser(req, res) {
       const token = jwt.sign({ id: userid }, process.env.SECRET, {
         expiresIn: 60 * 60 * 24 * 7, // expires in 7 days
       });
-      res.status(200).send({ auth: true, token, name });
+      res
+        .cookie("authToken", token, {
+          maxAge: 60 * 60 * 24 * 7,
+          httpOnly: true,
+        })
+        .status(200)
+        .send({ auth: true, name });
     }
   );
 }
@@ -32,7 +38,6 @@ function loginUser(req, res) {
     res.status(400).json({ auth: false, message: "Email is required" });
   if (!password)
     res.status(400).json({ auth: false, message: "Password is required" });
-  console.log({ email, password });
   pool.query(
     "SELECT * from users WHERE email = $1",
     [email],
@@ -52,7 +57,13 @@ function loginUser(req, res) {
         expiresIn: 60 * 60 * 24 * 7, // expires in 7 days
       });
 
-      res.status(200).send({ auth: true, token: token, name: user.name });
+      res
+        .cookie("authToken", token, {
+          maxAge: 60 * 60 * 24 * 7,
+          httpOnly: true,
+        })
+        .status(200)
+        .send({ auth: true, name: user.name });
     }
   );
 }

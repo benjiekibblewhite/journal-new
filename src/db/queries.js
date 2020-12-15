@@ -1,5 +1,6 @@
 const { pool } = require("./pool");
 
+// this should probably be a middleware!
 async function canUserAccessPost(postid, userid) {
   return new Promise((resolve, reject) => {
     pool.query(
@@ -16,6 +17,7 @@ async function canUserAccessPost(postid, userid) {
     );
   });
 }
+
 function getPosts(req, res) {
   const userid = req.userid;
   pool.query(
@@ -35,8 +37,8 @@ function getPost(req, res) {
   const userid = req.userid;
   pool.query("SELECT * from posts WHERE id = $1", [id], (error, result) => {
     if (error) throw error;
-    if (result.rows.length === 0) {
-      res.status(400).json({ message: "Post not found" });
+    if (result.rows.length == 0) {
+      return res.status(400).json({ message: "Post not found" });
     }
     if (userid === result.rows[0].userid) {
       res.status(200).json(result.rows);

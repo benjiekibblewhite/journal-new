@@ -15,13 +15,8 @@ const Post = ({ id, created_at, title }) => `<li class='post-list__item'>
 </li>`;
 
 function getPosts() {
-  const token = window.localStorage.getItem("token");
-
   return fetch("/api/posts", {
     method: "GET",
-    headers: {
-      "x-access-token": token,
-    },
   })
     .then((res) => res.json())
     .then((res) => res)

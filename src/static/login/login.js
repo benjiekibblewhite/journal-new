@@ -11,9 +11,7 @@ function login(email, password) {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log({ res });
       if (res.auth) {
-        window.localStorage.setItem("token", res.token);
         window.localStorage.setItem("name", res.name);
         window.location.replace("/");
       } else {
