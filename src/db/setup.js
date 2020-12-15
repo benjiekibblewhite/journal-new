@@ -20,13 +20,13 @@ function initDatabse() {
 
 function addUsers() {
   pool.query("ALTER TABLE posts ADD userID INTEGER", (error, result) => {
-    if (error) throw error;
+    if (error) console.error(error);
     console.log("userID column added to posts");
   });
   pool.query(
     "ALTER TABLE posts ADD FOREIGN KEY (userID) references users(userID);",
     (error, result) => {
-      if (error) throw error;
+      if (error) console.error(error);
       console.log("userID foreign key added to posts");
     }
   );
@@ -39,6 +39,5 @@ function addUsers() {
     }
   );
 }
-// addUsers()
-
-initDatabse();
+addUsers();
+// initDatabse();

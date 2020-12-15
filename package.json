@@ -7,8 +7,8 @@
     "test": "test",
     "start": "node -r dotenv/config ./index.js",
     "dev": "nodemon --config nodemon.json -r dotenv/config ./index.js",
-    "db-setup": "node -r dotenv/config ./db/setup.js",
-    "deploy": "git push origin master && git push heroku master"
+    "deploy": "git push origin master && git push heroku master",
+    "db:setup": "node -r dotenv/config ./src/db/setup.js"
   },
   "author": "benjie kibblewhite",
   "license": "ISC",
