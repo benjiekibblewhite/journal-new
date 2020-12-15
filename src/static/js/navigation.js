@@ -13,6 +13,11 @@ function logout() {
   window.location.replace("/login");
 }
 
+function showName() {
+  const name = window.localStorage.getItem("name");
+  document.getElementById("menu__user-name").innerText = name;
+}
+
 document
   .querySelectorAll(".menu__open-button")[0]
   .addEventListener("click", openNavigation);
@@ -22,3 +27,5 @@ document
 document
   .querySelectorAll(".menu__overlay")[0]
   .addEventListener("click", closeNavigation);
+
+showName();
