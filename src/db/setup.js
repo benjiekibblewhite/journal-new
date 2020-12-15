@@ -1,44 +1,37 @@
 const { pool } = require("./pool");
 
-function initDatabse() {
-  pool.query(
-    "CREATE TABLE posts (ID SERIAL PRIMARY KEY, created_at TIMESTAMP, updated_at TIMESTAMP, title TEXT, body TEXT, FOREIGN KEY (userID) REFERENCES USERS (userID))",
-    (error, result) => {
-      if (error) console.error(error);
-      console.log("Table posts Created");
-    }
-  );
+async function initDatabse() {
+  await pool
+    .query(
+      "CREATE TABLE posts (ID SERIAL PRIMARY KEY, created_at TIMESTAMP, updated_at TIMESTAMP, title TEXT, body TEXT, FOREIGN KEY (userID) REFERENCES USERS (userID))"
+    )
+    .catch(console.error);
 
-  pool.query(
-    "CREATE TABLE users (userID SERIAL PRIMARY KEY, registered_At TIMESTAMP, name TEXT, email TEXT UNIQUE, password TEXT)",
-    (error, result) => {
-      if (error) console.error(error);
-      console.log("Table users Created");
-    }
-  );
+  await pool
+    .query(
+      "CREATE TABLE users (userID SERIAL PRIMARY KEY, registered_At TIMESTAMP, name TEXT, email TEXT UNIQUE, password TEXT)"
+    )
+    .catch(console.error);
 }
 
-function addUsers() {
-  pool.query("ALTER TABLE posts ADD userID INTEGER", (error, result) => {
-    if (error) console.error(error);
-    console.log("userID column added to posts");
-  });
-  pool.query(
-    "ALTER TABLE posts ADD FOREIGN KEY (userID) references users(userID);",
-    (error, result) => {
-      if (error) console.error(error);
-      console.log("userID foreign key added to posts");
-    }
-  );
+async function addUsers() {
+  await pool.query("ALTER TABLE posts ADD userID INTEGER").catch(console.error);
+  await pool
+    .query(
+      "ALTER TABLE posts ADD FOREIGN KEY (userID) references users(userID);"
+    )
+    .catch(console.error);
 
-  pool.query(
-    "CREATE TABLE users (userID SERIAL PRIMARY KEY, registered_At TIMESTAMP, name TEXT, email TEXT UNIQUE, password TEXT)",
-    (error, result) => {
-      if (error) console.error(error);
-      console.log("Table users Created");
-    }
-  );
+  await pool
+    .query(
+      "CREATE TABLE users (userID SERIAL PRIMARY KEY, registered_At TIMESTAMP, name TEXT, email TEXT UNIQUE, password TEXT)"
+    )
+    .catch(console.error);
 }
-// addUsers();
-initDatabse();
-addUsers();
+
+async function init() {
+  await initDatabse();
+  await addUsers();
+}
+
+init();
