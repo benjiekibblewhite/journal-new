@@ -30,9 +30,8 @@ function register(name, email, password) {
 }
 function submitRegister(e) {
   e.preventDefault();
-  console.log(e);
   const { name, email, password, passwordConfirm } = e.target.elements;
-  if (password !== passwordConfirm) {
+  if (password.value != passwordConfirm.value) {
     setError("Passwords must match");
     return;
   }
