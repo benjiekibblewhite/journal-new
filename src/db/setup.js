@@ -8,7 +8,7 @@ async function initDatabse() {
     .catch(console.error);
   await pool
     .query(
-      "CREATE TABLE posts (ID SERIAL PRIMARY KEY, created_at TIMESTAMP, updated_at TIMESTAMP, title TEXT, body TEXT, FOREIGN KEY (userID) REFERENCES USERS (userID))"
+      "CREATE TABLE posts (ID SERIAL PRIMARY KEY, created_at TIMESTAMP, updated_at TIMESTAMP, title TEXT, body TEXT, userid INT, CONSTRAINT fk_userid FOREIGN KEY (userid) REFERENCES USERS (userid))"
     )
     .catch(console.error);
 }
