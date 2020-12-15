@@ -1,3 +1,7 @@
+function setError(message) {
+  document.getElementById("register-form-error").innerText = message;
+}
+
 function register(name, email, password) {
   fetch("/api/user/register", {
     method: "POST",
@@ -16,7 +20,7 @@ function register(name, email, password) {
         window.localStorage.setItem("name", res.name);
         window.location.replace("/");
       } else {
-        document.getElementById("register-form-error").innerText = res.message;
+        setError(res.message);
       }
     })
     .catch((err) => {
@@ -27,6 +31,10 @@ function register(name, email, password) {
 function submitRegister(e) {
   e.preventDefault();
   console.log(e);
-  const { name, email, password } = e.target.elements;
+  const { name, email, password, passwordConfirm } = e.target.elements;
+  if (password !== passwordConfirm) {
+    setError("Passwords must match");
+    return;
+  }
   register(name.value, email.value, password.value);
 }
