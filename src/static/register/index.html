@@ -36,35 +36,47 @@
       </div>
     </div>
     <div class="card content">
-      <h1>Login</h1>
-      <form class="account-form" onsubmit="submitLogin(event)">
-        <label for="login-email">
-          Email
-          <input
-            type="email"
-            name="email"
-            id="login-email"
-            required
-            class="post-form__input"
-            placeholder="Email"
-          />
-        </label>
-        <label for="login-password">
-          Password
-          <input
-            type="password"
-            name="password"
-            id="login-password"
-            required
-            class="post-form__input"
-            placeholder="Password"
-          />
-        </label>
-        <p id="login-form-error" class="form-error"></p>
-        <button type="submit">Login</button>
-      </form>
+      <h1>Register</h1>
+      <div id="register-or-post-list">
+        <form class="account-form" onsubmit="submitRegister(event)">
+          <label for="register-name">
+            Name
+            <input
+              name="name"
+              id="register-name"
+              required
+              class="post-form__input"
+              placeholder="Name"
+            />
+          </label>
+          <label for="register-email">
+            Email
+            <input
+              type="email"
+              name="email"
+              id="register-email"
+              required
+              class="post-form__input"
+              placeholder="Email"
+            />
+          </label>
+          <label for="register-password">
+            Password
+            <input
+              type="password"
+              name="password"
+              id="register-password"
+              required
+              class="post-form__input"
+              placeholder="Password"
+            />
+          </label>
+          <p id="register-form-error" class="form-error"></p>
+          <button type="submit">Register</button>
+        </form>
+      </div>
     </div>
-    <script src="./login.js"></script>
+    <script src="./register.js"></script>
     <script src="/js/navigation.js"></script>
   </body>
 </html>

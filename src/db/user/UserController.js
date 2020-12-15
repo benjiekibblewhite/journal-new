@@ -15,7 +15,9 @@ function createUser(req, res) {
     "INSERT INTO users (name, email, password, registered_at) VALUES ( $1, $2, $3, NOW() )  RETURNING *",
     [name, email, hashedPass],
     (error, result) => {
-      if (error) throw error;
+      if (error) {
+        return res.status(400).send({ auth: false, message: error.message });
+      }
       const { userid, name } = result.rows[0];
 
       const token = jwt.sign({ id: userid }, process.env.SECRET, {

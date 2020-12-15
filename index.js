@@ -22,7 +22,7 @@ app.get("/api", (req, res) => {
 
 // userOps
 app.get("/api/user", verifyToken, users.getUser);
-app.post("/api/user", users.createUser);
+app.post("/api/user/register", users.createUser);
 app.post("/api/user/login", users.loginUser);
 
 // posts
