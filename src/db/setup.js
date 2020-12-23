@@ -28,6 +28,16 @@ async function addUsers() {
     .catch(console.error);
 }
 
+async function addTags() {
+  await pool
+    .query("CREATE TABLE tags (id SERIAL PRIMARY KEY, tag TEXT NOT NULL)")
+    .catch(console.error);
+
+  await pool.query(
+    "CREATE TABLE posts_to_tags (post_id int references posts(id), tag_id int references tags(id), constraint id PRIMARY KEY (post_id, tag_id))"
+  );
+}
+
 async function init() {
   await initDatabse();
 }
