@@ -1,5 +1,14 @@
 const { pool } = require("./pool");
 
+const TAGS_TO_POST_JOIN = `FROM posts p
+LEFT JOIN (
+  SELECT pt.post_id AS id, ARRAY_AGG(t.tag) AS tag_array
+  FROM posts_to_tags pt
+  JOIN tags t ON t.id = pt.tag_id
+  GROUP BY pt.post_id
+) t USING (id)`
+
+
 // this should probably be a middleware!
 async function canUserAccessPost(postid, userid) {
   return new Promise((resolve, reject) => {
@@ -21,7 +30,7 @@ async function canUserAccessPost(postid, userid) {
 function getPosts(req, res) {
   const userid = req.userid;
   pool.query(
-    "SELECT * FROM posts WHERE userid = $1 ORDER BY created_at DESC",
+    `SELECT p.id, p.created_at, p.title, tag_array ${TAGS_TO_POST_JOIN} WHERE p.userid = $1;`, 
     [userid],
     (error, result) => {
       if (error) {
@@ -35,7 +44,7 @@ function getPosts(req, res) {
 function getPost(req, res) {
   const id = parseInt(req.params.id);
   const userid = req.userid;
-  pool.query("SELECT * from posts WHERE id = $1", [id], (error, result) => {
+  pool.query(`SELECT * ${TAGS_TO_POST_JOIN} WHERE id = $1`, [id], (error, result) => {
     if (error) throw error;
     if (result.rows.length == 0) {
       return res.status(400).json({ message: "Post not found" });

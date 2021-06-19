@@ -19,7 +19,7 @@ function getPosts() {
     method: "GET",
   })
     .then((res) => res.json())
-    .then((res) => res)
+    .then((res) => console.log(res) || res)
     .catch(console.error);
 }
 

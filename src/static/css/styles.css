@@ -179,6 +179,12 @@ button.with-icon {
   margin-bottom: 15px;
 }
 
+.tag-list {
+  list-style: none;
+  display: flex;
+  padding-left: 0;
+}
+
 #post-title {
   font-family: var(--secondary-font);
   color: var(--primary-color);

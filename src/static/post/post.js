@@ -9,12 +9,16 @@ const EditLink = (id) =>
 const DeleteButton = (id) =>
   `<button data-id='${id}' class='post__delete-button'>Delete Post</button>`;
 
-const Post = ({ created_at, updated_at, body, id }) => `
+
+const TagsList = (tags) => console.log(tags) || `<ul class='tag-list tag-list__post'>${tags.map(tag => `<li>${tag}</li>`).join('')}</ul>`  
+
+const Post = ({ created_at, updated_at, body, id, tag_array }) => `
 <article class='post'>
   <header>
     <p class='post__time'><time datetime='${created_at}'>${new Date(
   created_at
 ).toDateString()}</time></p>
+    ${TagsList(tag_array)}
     <section class='post__body'>${body}</section>
     <div class='post__buttons'>
       ${EditLink(id)} ${DeleteButton(id)} 
@@ -25,7 +29,7 @@ const Post = ({ created_at, updated_at, body, id }) => `
 function getPost(id) {
   return fetch(`/api/posts/${id}`)
     .then((res) => res.json())
-    .then((res) => res)
+    .then((res) => console.log(res) || res)
     .catch(console.error);
 }
 
