@@ -21,15 +21,15 @@ async function canUserAccessPost(postid, userid) {
 function getPosts(req, res) {
   const userid = req.userid;
   pool.query(
-    // "SELECT * FROM posts WHERE userid = $1 ORDER BY created_at DESC",
-    `SELECT id, posts.title, posts.body, posts.created_at, posts.updated_at, t.tag_array 
-      FROM posts 
-      JOIN(
+    `SELECT id, p.title, t.tag_array
+    FROM posts p
+      LEFT JOIN (
         SELECT pt.post_id AS id, ARRAY_AGG(t.tag) AS tag_array
         FROM posts_to_tags pt
         JOIN tags t ON t.id = pt.tag_id
         GROUP BY pt.post_id
-      ) t USING (id)  ;`[userid],
+    ) t USING (id) WHERE p.userid = $1;`, 
+    [userid],
     (error, result) => {
       if (error) {
         throw error;

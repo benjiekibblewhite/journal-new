@@ -40,6 +40,8 @@ async function addTags() {
 
 async function init() {
   await initDatabse();
+  await addUsers();
+  await addTags();
 }
 
 init();
