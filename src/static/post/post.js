@@ -25,7 +25,7 @@ const Post = ({ created_at, updated_at, body, id }) => `
 function getPost(id) {
   return fetch(`/api/posts/${id}`)
     .then((res) => res.json())
-    .then((res) => res)
+    .then((res) => console.log(res) || res)
     .catch(console.error);
 }
 
